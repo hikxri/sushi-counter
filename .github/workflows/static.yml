@@ -1,4 +1,6 @@
-name: Deploy static content to Pages
+# thanks, chatgpt
+
+name: Deploy Sushi Counter to GitHub Pages
 
 on:
   push:
@@ -20,24 +22,37 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
+      # 1. Checkout repo
       - name: Checkout
         uses: actions/checkout@v5
-      - name: Set up Node
-        uses: actions/setup-node@v5
+
+      # 2. Install Bun
+      - name: Install Bun
+        uses: oven-sh/bun@v1
         with:
-          node-version: lts/*
-          cache: 'npm'
+          version: stable
+
+      # 3. Install dependencies with Bun
       - name: Install dependencies
-        run: npm ci
+        run: bun install
+
+      # 4. Build the project
       - name: Build
-        run: npm run build
+        run: bun run build
+
+      # 5. Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      # 6. Upload dist folder as artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
+
+      # 7. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
