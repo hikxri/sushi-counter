@@ -2,6 +2,8 @@ import { Button, CloseButton, Dialog, Portal, Text } from "@chakra-ui/react";
 import { getTranslation } from "../../lib/translation";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 import { useDataContext } from "../../contexts/DataContext";
+import { LuUndo } from "react-icons/lu";
+import { FaXmark } from "react-icons/fa6";
 
 export default function ResetDataButton() {
   const { setData } = useDataContext();
@@ -10,7 +12,7 @@ export default function ResetDataButton() {
   return (
     <Dialog.Root size={"xs"} placement={"center"}>
       <Dialog.Trigger asChild>
-        <Button variant="outline" paddingX="5">{tl.resetButtonLabel}</Button>
+        <Button variant="outline" paddingX="5"><LuUndo />{tl.resetButtonLabel}</Button>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
@@ -24,10 +26,10 @@ export default function ResetDataButton() {
             </Dialog.Body>
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>
-                <Button variant="outline">{tl.cancelButtonLabel}</Button>
+                <Button variant="outline"><FaXmark />{tl.cancelButtonLabel}</Button>
               </Dialog.ActionTrigger>
               <Dialog.ActionTrigger asChild>
-                <Button onClick={onClick}>{tl.resetButtonLabel}</Button>
+                <Button onClick={onClick}><LuUndo />{tl.resetButtonLabel}</Button>
               </Dialog.ActionTrigger>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>

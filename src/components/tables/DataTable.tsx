@@ -1,8 +1,9 @@
-import { Button, Checkbox, Table } from "@chakra-ui/react";
+import { Button, Checkbox, IconButton, Table } from "@chakra-ui/react";
 import { useDataContext } from "../../contexts/DataContext";
 import { useState } from "react";
 import { getTranslation } from "../../lib/translation";
 import { useLanguageContext } from "../../contexts/LanguageContext";
+import { FaTrash } from "react-icons/fa6";
 
 export default function DataTable({ canDelete = true }: { canDelete?: boolean }) {
   const { data, setData } = useDataContext();
@@ -12,7 +13,7 @@ export default function DataTable({ canDelete = true }: { canDelete?: boolean })
   const rows = data.map((d) => (
     <Table.Row key={d.index} data-selected={selection.includes(d.index) ? "" : undefined}>
       {canDelete && (
-        <Table.Cell>
+        <Table.Cell textAlign={"center"}>
           <Checkbox.Root
             size="sm"
             mt="0.5"
@@ -36,13 +37,20 @@ export default function DataTable({ canDelete = true }: { canDelete?: boolean })
     <>
       {canDelete && (
         <Button paddingX="5" variant="outline" disabled={selection.length === 0} onClick={onDelete}>
+          <FaTrash />
           {tl.deleteButtonLabel}
         </Button>
       )}
       <Table.Root marginY={"5"} variant={"line"} colorPalette={"border"}>
         <Table.Header>
           <Table.Row>
-            {canDelete && <Table.ColumnHeader />}
+            {canDelete && (
+              <Table.ColumnHeader textAlign={"center"}>
+                <IconButton size={"xs"} variant={"outline"} disabled={selection.length === 0} onClick={onDelete}>
+                  <FaTrash />
+                </IconButton>
+              </Table.ColumnHeader>
+            )}
             <Table.ColumnHeader>{tl.price}</Table.ColumnHeader>
             <Table.ColumnHeader>{tl.note}</Table.ColumnHeader>
           </Table.Row>

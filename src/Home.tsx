@@ -19,6 +19,7 @@ import ResetDataButton from "./components/ui/ResetDataButton";
 import { getTranslation } from "./lib/translation";
 import { useLanguageContext } from "./contexts/LanguageContext";
 import { useNavigate } from "react-router";
+import { FaCartShopping, FaPlus } from "react-icons/fa6";
 
 export default function Home() {
   const [selectedPrice, setSelectedPrice] = useState<string[]>([]);
@@ -32,10 +33,10 @@ export default function Home() {
 
   const options = createListCollection({
     items: [
+      { label: tl.other, value: "other" },
       ...sushiPrices.map((p) => {
         return { label: p + " 円", value: p };
       }),
-      { label: tl.other, value: "other" },
     ],
   });
 
@@ -69,10 +70,12 @@ export default function Home() {
           <NoteInput note={note} setNote={setNote} />
         </Stack>
         <Button paddingX="5" onClick={onAdd}>
+          <FaPlus />
           {tl.addButtonLabel}
         </Button>
         <DataTable />
         <Button paddingX="5" onClick={() => navigate("/kaikei")}>
+          <FaCartShopping />
           {tl.checkout}
         </Button>
         <ResetDataButton />

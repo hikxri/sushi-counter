@@ -7,7 +7,7 @@ import { Provider } from "./components/ui/provider";
 import { getLocalData, setLocalData } from "./lib/localData";
 import { Center, createListCollection, HStack, Portal, Select, Text } from "@chakra-ui/react";
 import { LanguageContext, type Language, type LanguageContextType } from "./contexts/LanguageContext";
-import { FaGithub } from "react-icons/fa6";
+import { FaGithub, FaGlobe } from "react-icons/fa6";
 
 export default function App() {
   const [data, setData] = useState<DataType[]>(getLocalData() || []);
@@ -46,13 +46,14 @@ function LanguageSelector({ language, setLanguage }: LanguageContextType) {
     <Select.Root
       collection={languages}
       size="md"
-      width="90px"
+      width="110px"
       value={[language]}
       onValueChange={(e) => setLanguage(e.value[0] as Language)}
     >
       <Select.HiddenSelect />
       <Select.Control>
         <Select.Trigger justifyContent={"center"}>
+          <FaGlobe />
           <Select.ValueText placeholder="Language" />
         </Select.Trigger>
       </Select.Control>

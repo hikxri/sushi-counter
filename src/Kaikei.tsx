@@ -6,6 +6,7 @@ import DataListByPrice from "./components/tables/DataListByPrice";
 import { getTranslation } from "./lib/translation";
 import { useLanguageContext } from "./contexts/LanguageContext";
 import ResetDataButton from "./components/ui/ResetDataButton";
+import { FaChevronLeft } from "react-icons/fa6";
 
 export default function Kaikei() {
   const { data } = useDataContext();
@@ -25,7 +26,7 @@ export default function Kaikei() {
         <Text fontSize={"lg"}>({total} 円 + 10% {tl.tax})</Text>
         <DataTable canDelete={false} />
         <DataListByPrice />
-        <Button onClick={() => navigate("/")}>{tl.backButtonLabel}</Button>
+        <Button marginTop={"4"} onClick={() => navigate("/")}><FaChevronLeft />{tl.backButtonLabel}</Button>
         <ResetDataButton />
       </Stack>
     </Center>
