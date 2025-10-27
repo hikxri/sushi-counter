@@ -35,7 +35,7 @@ export default function DataTable({ canDelete = true }: { canDelete?: boolean })
   return (
     <>
       {canDelete && (
-        <Button variant="outline" disabled={selection.length === 0} onClick={onDelete}>
+        <Button paddingX="5" variant="outline" disabled={selection.length === 0} onClick={onDelete}>
           {tl.deleteButtonLabel}
         </Button>
       )}

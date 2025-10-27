@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import DataListByPrice from "./components/tables/DataListByPrice";
 import { getTranslation } from "./lib/translation";
 import { useLanguageContext } from "./contexts/LanguageContext";
+import ResetDataButton from "./components/ui/ResetDataButton";
 
 export default function Kaikei() {
   const { data } = useDataContext();
@@ -25,6 +26,7 @@ export default function Kaikei() {
         <DataTable canDelete={false} />
         <DataListByPrice />
         <Button onClick={() => navigate("/")}>{tl.backButtonLabel}</Button>
+        <ResetDataButton />
       </Stack>
     </Center>
   );

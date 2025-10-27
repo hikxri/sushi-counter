@@ -1,14 +1,16 @@
 import { Button, CloseButton, Dialog, Portal, Text } from "@chakra-ui/react";
 import { getTranslation } from "../../lib/translation";
 import { useLanguageContext } from "../../contexts/LanguageContext";
+import { useDataContext } from "../../contexts/DataContext";
 
-export default function ResetDataButton({ onClick }: { onClick: () => void }) {
+export default function ResetDataButton() {
+  const { setData } = useDataContext();
   const tl = getTranslation(useLanguageContext().language);
 
   return (
     <Dialog.Root size={"xs"} placement={"center"}>
       <Dialog.Trigger asChild>
-        <Button variant="outline" width="60%">{tl.resetButtonLabel}</Button>
+        <Button variant="outline" paddingX="5">{tl.resetButtonLabel}</Button>
       </Dialog.Trigger>
       <Portal>
         <Dialog.Backdrop />
@@ -36,4 +38,8 @@ export default function ResetDataButton({ onClick }: { onClick: () => void }) {
       </Portal>
     </Dialog.Root>
   )
+
+  function onClick() {
+    setData([]);
+  }
 }

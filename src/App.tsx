@@ -5,8 +5,9 @@ import { DataContext, type DataType } from "./contexts/DataContext";
 import { useState } from "react";
 import { Provider } from "./components/ui/provider";
 import { getLocalData, setLocalData } from "./lib/localData";
-import { Center, createListCollection, Portal, Select } from "@chakra-ui/react";
+import { Center, createListCollection, HStack, Portal, Select, Text } from "@chakra-ui/react";
 import { LanguageContext, type Language, type LanguageContextType } from "./contexts/LanguageContext";
+import { FaGithub } from "react-icons/fa6";
 
 export default function App() {
   const [data, setData] = useState<DataType[]>(getLocalData() || []);
@@ -31,6 +32,9 @@ export default function App() {
               <Route path="*" element={<Home />} />
             </Routes>
           </HashRouter>
+          <Center marginBottom="2">
+            <Footer />
+          </Center>
         </DataContext.Provider>
       </LanguageContext.Provider>
     </Provider>
@@ -74,3 +78,12 @@ const languages = createListCollection({
     { label: "日本語", value: "ja" },
   ],
 });
+
+function Footer() {
+  return (
+    <HStack alignItems={"center"} gapX={1}>
+      <Text color={"gray.500"}>Made by <a href="https://github.com/hikxri/"><u>hikari</u></a></Text>
+      <FaGithub color="gray"/>
+    </HStack>
+  );
+}

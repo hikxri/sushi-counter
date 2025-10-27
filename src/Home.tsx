@@ -54,7 +54,9 @@ export default function Home() {
           {tl.title}
         </Text>
         <Text fontSize={"4xl"}>{(total * 1.1).toFixed(1)} 円</Text>
-        <Text fontSize={"lg"}>({total} 円 + 10% {tl.tax})</Text>
+        <Text fontSize={"lg"}>
+          ({total} 円 + 10% {tl.tax})
+        </Text>
         {/* <Stack width={"100%"} marginY={3} direction={{ base: "column", md: "row" }}> */}
         <Stack width={"100%"} marginY={3}>
           <PriceSelector
@@ -66,14 +68,14 @@ export default function Home() {
           />
           <NoteInput note={note} setNote={setNote} />
         </Stack>
-        <Button width="50%" onClick={onAdd}>
+        <Button paddingX="5" onClick={onAdd}>
           {tl.addButtonLabel}
         </Button>
         <DataTable />
-        <Button width="50%" onClick={() => navigate("/kaikei")}>
+        <Button paddingX="5" onClick={() => navigate("/kaikei")}>
           {tl.checkout}
         </Button>
-        <ResetDataButton onClick={() => setData([])} />
+        <ResetDataButton />
       </Stack>
     </Center>
   );
@@ -148,17 +150,19 @@ function PriceSelector({
         </Portal>
       </Select.Root>
       {/* <Input variant="outline" disabled={!isCustom} value={customPrice} onChange={(e) => setCustomPrice(Number(e.target.value))} /> */}
-      <NumberInput.Root
-        variant="outline"
-        disabled={!isCustom}
-        value={String(customPrice)}
-        onValueChange={(e) => setCustomPrice(Number(e.value))}
-        min={0}
-        inputMode="numeric"
-      >
-        <NumberInput.Control />
-        <NumberInput.Input />
-      </NumberInput.Root>
+      {isCustom && (
+        <NumberInput.Root
+          variant="outline"
+          disabled={!isCustom}
+          value={String(customPrice)}
+          onValueChange={(e) => setCustomPrice(Number(e.value))}
+          min={0}
+          inputMode="numeric"
+        >
+          <NumberInput.Control />
+          <NumberInput.Input />
+        </NumberInput.Root>
+      )}
     </>
   );
 }
@@ -169,7 +173,12 @@ function NoteInput({ note, setNote }: { note: string; setNote: (note: string) =>
   return (
     <Field.Root>
       <Field.Label fontSize="md">{tl.note}</Field.Label>
-      <Input variant="outline" value={note} onChange={(e) => setNote(e.target.value)} placeholder={tl.notePlaceholder} />
+      <Input
+        variant="outline"
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+        placeholder={tl.notePlaceholder}
+      />
     </Field.Root>
   );
 }
