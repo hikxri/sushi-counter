@@ -1,5 +1,4 @@
 # thanks, chatgpt
-
 name: Deploy Sushi Counter to GitHub Pages
 
 on:
@@ -24,35 +23,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
+      # 1. Checkout your repository
       - name: Checkout
         uses: actions/checkout@v5
 
-      # 2. Install Bun
-      - name: Install Bun
-        uses: oven-sh/bun@v2
+      # 2. Set up Node (npm comes with it)
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
         with:
-          version: stable
+          node-version: lts/*
+          cache: 'npm'
 
-      # 3. Install dependencies with Bun
+      # 3. Install dependencies
       - name: Install dependencies
-        run: bun install
+        run: npm ci
 
-      # 4. Build the project
+      # 4. Build the site
       - name: Build
-        run: bun run build
+        run: npm run build
 
-      # 5. Setup Pages
+      # 5. Set up GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 6. Upload dist folder as artifact
+      # 6. Upload the dist folder
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
-      # 7. Deploy to GitHub Pages
+      # 7. Deploy
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
